@@ -5,20 +5,29 @@ const router = useRouter();
 const localePath = useLocalePath();
 
 const settingsStore = useSettingsStore();
+
+const closeMaineMenu = () => {
+  menuController.close("main-menu");
+};
+
+const routeHandle = (path: string) => {
+  router.push(localePath(path));
+  closeMaineMenu();
+};
 </script>
 
 <template>
-  <ion-menu content-id="main-content">
+  <ion-menu menu-id="main-menu" content-id="main-content">
     <ion-header>
       <ion-toolbar>
         <ion-title>{{ $t("menu.title") }}</ion-title>
       </ion-toolbar>
     </ion-header>
     <ion-content>
-      <ion-item button @click="router.push(localePath('/'))">
+      <ion-item button @click="routeHandle('/')">
         {{ $t("menu.home") }}
       </ion-item>
-      <ion-item button @click="router.push(localePath('/settings'))">
+      <ion-item button @click="routeHandle('/settings')">
         {{ $t("menu.settings") }}
       </ion-item>
       <ion-item>
@@ -41,7 +50,7 @@ const settingsStore = useSettingsStore();
     <ion-header>
       <ion-toolbar>
         <ion-buttons slot="start">
-          <ion-menu-button></ion-menu-button>
+          <ion-menu-button />
         </ion-buttons>
         <ion-title>{{ $t("menu.title") }}</ion-title>
       </ion-toolbar>
